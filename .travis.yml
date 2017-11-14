@@ -10,5 +10,6 @@ before_install:
 install:
     - npm uninstall babel -g
     - "( cd open-web-dev-tools/ && `which npm` install -g babel-cli babel-preset-env babel-preset-es2015 typings )"
+    - "( cd open-web-dev-tools/ && `which npm` install babel-preset-env )"
 script:
     - cd open-web-dev-tools/ && perl gen-helpers.pl && make && make test
