@@ -30,6 +30,9 @@ as far as we know.
 
 # Technologies
 
-We use TypeScript, jQuery and some GNU make and perl 5 build and test code.
+We use [TypeScript](https://en.wikipedia.org/wiki/TypeScript),
+[jQuery](https://en.wikipedia.org/wiki/JQuery), and some
+[GNU make](https://www.gnu.org/software/make/) and
+[perl 5](https://www.perl.org/) build and test code.
 Contributions in other languages that can compile to JS are welcome, barring
 more accessible alternatives.
