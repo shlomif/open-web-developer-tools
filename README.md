@@ -36,3 +36,8 @@ We use [TypeScript](https://en.wikipedia.org/wiki/TypeScript),
 [perl 5](https://www.perl.org/) build and test code.
 Contributions in other languages that can compile to JS are welcome, barring
 more accessible alternatives.
+
+# How to help
+
+Sending pull-requests or filing GitHub issues are welcome. For other ways to
+help me see my [How to Help page](http://www.shlomifish.org/meta/how-to-help/).
