@@ -1,0 +1,13 @@
+os: linux
+dist: trusty
+# See https://github.com/travis-ci/travis-ci/issues/8378 ; remove later
+group: deprecated-2017Q3
+python:
+    - '3.6'
+before_install:
+    - sudo apt-get update -qq
+    - sudo apt-get install -y node npm perl libio-all-perl
+install:
+    - true
+script:
+    - cd open-web-dev-tools/ && perl gen-helpers.pl && make && make test
