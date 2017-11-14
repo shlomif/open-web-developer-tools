@@ -3,9 +3,6 @@ SHELL = /bin/bash
 
 all: dummy
 
-include rules.mak
-include include.mak
-
 WITH_DEVEL_VERSION = 1
 
 DEVEL_VER_USE_CACHE = 1
@@ -40,12 +37,6 @@ IMAGES = $(addprefix $(D)/,$(IMAGES_PRE1))
 
 HTMLS = $(addprefix $(D)/,$(SRC_DOCS))
 
-DOCS_PROTO = AUTHORS COPYING INSTALL NEWS README TODO USAGE
-DOCS_AUX_PROTO = asciidoc.css asciidoc.js
-ARC_DOCS = $(patsubst %,$(D)/%,$(DOCS_PROTO))
-DOCS_AUX = $(patsubst %,$(D)/docs/distro/%,$(DOCS_AUX_PROTO))
-DOCS_HTMLS = $(patsubst %,$(D)/docs/distro/%.html,$(DOCS_PROTO))
-
 INCLUDES_PROTO = std/logo.wml
 INCLUDES = $(addprefix lib/,$(INCLUDES_PROTO))
 
@@ -53,6 +44,7 @@ INCLUDES = $(addprefix lib/,$(INCLUDES_PROTO))
 # the web-server now supports indexes.
 # SUBDIRS_WITH_INDEXES = $(WIN32_BUILD_SUBDIRS)
 #
+SRC_DIRS = js
 SUBDIRS = $(addprefix $(D)/,$(SRC_DIRS))
 
 INDEXES = $(addsuffix /index.html,$(SUBDIRS_WITH_INDEXES))
@@ -69,21 +61,11 @@ WML_FLAGS += --passoption=2,-X3074 \
 	$(LATEMP_WML_FLAGS) --passoption=3,-I../lib/ \
 	-I $${HOME}/apps/wml
 
-JS_MEM_BASE = libfreecell-solver.js.mem
-LIBFREECELL_SOLVER_JS_DIR = lib/fc-solve-for-javascript
-LIBFREECELL_SOLVER_JS = $(LIBFREECELL_SOLVER_JS_DIR)/libfreecell-solver.js
-DEST_LIBFREECELL_SOLVER_JS = $(D)/js/libfreecell-solver.min.js
-DEST_LIBFREECELL_SOLVER_JS_NON_MIN = $(D)/js/libfreecell-solver.js
-DEST_LIBFREECELL_SOLVER_JS_MEM = $(patsubst %,%/$(JS_MEM_BASE),$(D)/js $(D)/js-fc-solve/text $(D)/js-fc-solve/automated-tests lib/for-node .)
-DEST_QSTRING_JS = dest/js/jquery.querystring.js
-
 CSS_TARGETS = $(D)/style.css $(D)/print.css $(D)/jqui-override.css $(D)/web-fc-solve.css
 
 DEST_WEB_FC_SOLVE_UI_MIN_JS = $(D)/js/web-fcs.min.js
 
-dummy : $(D) $(SUBDIRS) $(HTMLS) $(D)/download.html $(IMAGES) $(RAW_SUBDIRS) $(ARC_DOCS) $(INDEXES) $(DOCS_AUX) $(DOCS_HTMLS) $(DEST_LIBFREECELL_SOLVER_JS) $(DEST_LIBFREECELL_SOLVER_JS_NON_MIN) $(DEST_QSTRING_JS) $(DEST_WEB_FC_SOLVE_UI_MIN_JS) $(CSS_TARGETS) htaccesses_target
-
-dummy: $(DEST_LIBFREECELL_SOLVER_JS_MEM)
+dummy : $(D) $(SUBDIRS) $(HTMLS) $(IMAGES) $(RAW_SUBDIRS) $(ARC_DOCS) $(INDEXES) $(DOCS_AUX) $(DOCS_HTMLS) $(DEST_LIBFREECELL_SOLVER_JS) $(DEST_LIBFREECELL_SOLVER_JS_NON_MIN) $(DEST_QSTRING_JS) $(DEST_WEB_FC_SOLVE_UI_MIN_JS) $(CSS_TARGETS) htaccesses_target
 
 SASS_STYLE = compressed
 # SASS_STYLE = expanded
@@ -121,32 +103,6 @@ $(RAW_SUBDIRS): $(D)/% : src/%
 	rm -fr $@
 	cp -r $< $@
 
-FC_SOLVE_SOURCE_DIR := $(PWD)/../../source
-
-LIBFREECELL_SOLVER_JS_DIR__CMAKE_DIR = $(LIBFREECELL_SOLVER_JS_DIR)/CMAKE-BUILD-dir
-LIBFREECELL_SOLVER_JS_DIR__CMAKE_CACHE = $(LIBFREECELL_SOLVER_JS_DIR__CMAKE_DIR)/CMakeCache.txt
-LIBFREECELL_SOLVER_JS_DIR__DESTDIR = $(PWD)/$(LIBFREECELL_SOLVER_JS_DIR)/__DESTDIR
-LIBFREECELL_SOLVER_JS_DIR__DESTDIR_DATA = $(LIBFREECELL_SOLVER_JS_DIR__DESTDIR)/fc-solve/share/freecell-solver/presetrc
-
-FC_SOLVE_CMAKE_DIR := $(PWD)/$(LIBFREECELL_SOLVER_JS_DIR__CMAKE_DIR)
-
-$(LIBFREECELL_SOLVER_JS_DIR__CMAKE_CACHE):
-	mkdir -p $(LIBFREECELL_SOLVER_JS_DIR__CMAKE_DIR)
-	( cd $(LIBFREECELL_SOLVER_JS_DIR__CMAKE_DIR) && cmake -DCMAKE_INSTALL_PREFIX=/fc-solve $(FC_SOLVE_SOURCE_DIR) && make generate_c_files)
-
-$(LIBFREECELL_SOLVER_JS_DIR__DESTDIR_DATA): $(LIBFREECELL_SOLVER_JS_DIR__CMAKE_CACHE)
-	( cd $(LIBFREECELL_SOLVER_JS_DIR__CMAKE_DIR) && make && make install DESTDIR=$(LIBFREECELL_SOLVER_JS_DIR__DESTDIR) )
-	# We need that to make sure the timestamps are correct because apparently
-	# the make install process updates the timestamps of CMakeCache.txt and
-	# the Makefile there.
-	find $(LIBFREECELL_SOLVER_JS_DIR__DESTDIR) -type f -print0 | xargs -0 touch
-
-$(LIBFREECELL_SOLVER_JS): $(LIBFREECELL_SOLVER_JS_DIR__DESTDIR_DATA)
-	( cd $(LIBFREECELL_SOLVER_JS_DIR) && make -f $(FC_SOLVE_SOURCE_DIR)/../scripts/Makefile.to-javascript.mak SRC_DIR=$(FC_SOLVE_SOURCE_DIR) CMAKE_DIR=$(FC_SOLVE_CMAKE_DIR) && perl -i -lape 's/[ \t]+$$//' *.js *.html)
-
-clean_js:
-	rm -f $(LIBFREECELL_SOLVER_JS_DIR)/*.js $(LIBFREECELL_SOLVER_JS_DIR)/*.bc
-
 MULTI_YUI = ./bin/Run-YUI-Compressor
 
 $(DEST_LIBFREECELL_SOLVER_JS): $(LIBFREECELL_SOLVER_JS)
@@ -156,22 +112,15 @@ $(DEST_QSTRING_JS): lib/jquery/jquery.querystring.js
 	$(MULTI_YUI) -o $@ $<
 
 
-WEB_FCS_UI_JS_SOURCES = $(D)/js/ms-rand.js src/js/gen-ms-fc-board.js src/js/web-fc-solve--expand-moves.js $(D)/js/web-fc-solve.js $(D)/js/web-fc-solve-ui.js
-
+WEB_FCS_UI_JS_SOURCES = $(D)/js/ms-rand.js
 $(DEST_WEB_FC_SOLVE_UI_MIN_JS): $(WEB_FCS_UI_JS_SOURCES)
 	$(MULTI_YUI) -o $@ $(WEB_FCS_UI_JS_SOURCES)
 
-$(DEST_LIBFREECELL_SOLVER_JS_NON_MIN): $(LIBFREECELL_SOLVER_JS)
-	cp -f $< $@
-
-$(DEST_LIBFREECELL_SOLVER_JS_MEM): %: lib/fc-solve-for-javascript/libfreecell-solver.js.mem
-	cp -f $< $@
-
 FCS_VALID_DEST = $(D)/js/fcs-validate.js
 
-TYPINGS = src/charts/dbm-solver-__int128-optimisation/typings/index.d.ts src/js/typings/index.d.ts
+TYPINGS = src/js/typings/index.d.ts
 
-DEST_BABEL_JSES = $(D)/js/ms-rand.js $(D)/js/web-fc-solve.js $(D)/js/web-fc-solve-ui.js
+DEST_BABEL_JSES = $(D)/js/ms-rand.js
 
 all: $(TYPINGS) $(DEST_BABEL_JSES)
 
@@ -179,7 +128,6 @@ $(DEST_BABEL_JSES): $(D)/%.js: lib/babel/%.js
 	babel -o $@ $<
 
 $(TYPINGS):
-	cd src/charts/dbm-solver-__int128-optimisation/ && typings install dt~jquery --global --save
 	cd src/js && typings install dt~qunit --global --save
 
 TEST_FCS_VALID_DEST = $(D)/js/web-fc-solve-tests--fcs-validate.js
@@ -188,7 +136,7 @@ TYPESCRIPT_DEST_FILES = $(FCS_VALID_DEST) $(TEST_FCS_VALID_DEST)
 TYPESCRIPT_DEST_FILES__NODE = $(patsubst $(D)/%.js,lib/for-node/%.js,$(TYPESCRIPT_DEST_FILES))
 TYPESCRIPT_COMMON_DEFS_FILES = src/js/typings/index.d.ts
 
-JS_DEST_FILES__NODE = lib/for-node/js/libfreecell-solver.min.js lib/for-node/js/web-fc-solve.js lib/for-node/js/web-fc-solve--expand-moves.js lib/for-node/js/web-fc-solve-tests.js
+JS_DEST_FILES__NODE =
 
 all: $(JS_DEST_FILES__NODE)
 
@@ -202,17 +150,6 @@ $(TYPESCRIPT_DEST_FILES): $(D)/%.js: src/%.ts
 
 $(TYPESCRIPT_DEST_FILES__NODE): lib/for-node/%.js: src/%.ts
 	tsc --target es5 --module commonjs --outDir lib/for-node/js $(TYPESCRIPT_COMMON_DEFS_FILES) $<
-
-TS_CHART_DEST = $(D)/charts/dbm-solver-__int128-optimisation/chart-using-flot.js
-TS_CHART2_DEST = $(D)/charts/fc-pro--4fc-intractable-deals--report/chart-using-flot.js
-
-all: $(TS_CHART_DEST) $(TS_CHART2_DEST)
-
-$(TS_CHART_DEST): $(D)/%.js: src/%.ts
-	tsc --module amd --out $@ src/charts/dbm-solver-__int128-optimisation/typings/index.d.ts ./src/charts/dbm-solver-__int128-optimisation/jquery.flot.d.ts $<
-
-$(TS_CHART2_DEST): $(D)/%.js: src/%.ts
-	tsc --module amd --out $@ src/charts/dbm-solver-__int128-optimisation/typings/index.d.ts ./src/charts/dbm-solver-__int128-optimisation/jquery.flot.d.ts $<
 
 $(TEST_FCS_VALID_DEST): $(patsubst $(D)/%.js,src/%.ts,$(FCS_VALID_DEST))
 
