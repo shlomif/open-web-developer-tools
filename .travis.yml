@@ -15,6 +15,6 @@ install:
     - sudo cpanm HTML::Spelling::Site MooX MooX::late Test::HTML::Recursive::DeprecatedTags Test::HTML::Tidy::Recursive Test::TrailingSpace
     - npm uninstall babel -g
     - "( cd open-web-dev-tools/ && `which npm` install -g babel-cli babel-preset-env babel-preset-es2015 requirejs qunit-cli typescript typings )"
-    - "( cd open-web-dev-tools/ && `which npm` install babel-preset-env babel-preset-react babel-preset-stage-2 )"
+    - "( cd open-web-dev-tools/ && `which npm` install babel-preset-env babel-preset-react babel-preset-stage-2 requirejs )"
 script:
     - cd open-web-dev-tools/ && perl gen-helpers.pl && make && make test
