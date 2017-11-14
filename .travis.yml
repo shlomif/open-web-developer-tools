@@ -10,8 +10,9 @@ before_install:
     - sudo ln -s /usr/bin/yui-compressor /usr/bin/yuicompressor
 install:
     - gem install sass compass compass-blueprint
-    - cpanm --force HTML::Tidy
-    - cpanm MooX Test::HTML::Recursive::DeprecatedTags Test::HTML::Tidy::Recursive Test::TrailingSpace
+    - sudo cpanm Alien::Tidyp YAML::XS
+    - sudo cpanm --force HTML::Tidy
+    - sudo cpanm MooX Test::HTML::Recursive::DeprecatedTags Test::HTML::Tidy::Recursive Test::TrailingSpace
     - npm uninstall babel -g
     - "( cd open-web-dev-tools/ && `which npm` install -g babel-cli babel-preset-env babel-preset-es2015 qunit-cli typescript typings )"
     - "( cd open-web-dev-tools/ && `which npm` install babel-preset-env babel-preset-react babel-preset-stage-2 )"
