@@ -8,6 +8,6 @@ before_install:
     - sudo apt-get update -qq
     - sudo apt-get install -y node npm perl libio-all-perl
 install:
-    - sudo npm install babel typings
+    - sudo `which npm` install babel typings
 script:
     - cd open-web-dev-tools/ && perl gen-helpers.pl && make && make test
