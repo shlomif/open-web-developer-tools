@@ -9,6 +9,6 @@ before_install:
     - sudo apt-get install -y node npm perl libio-all-perl
 install:
     - npm uninstall babel -g
-    - "( cd open-web-dev-tools/ && `which npm` install -g babel-cli babel-preset-env typings )"
+    - "( cd open-web-dev-tools/ && `which npm` install -g babel-cli babel-preset-env babel-preset-es2015 typings )"
 script:
     - cd open-web-dev-tools/ && perl gen-helpers.pl && make && make test
