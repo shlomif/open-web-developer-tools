@@ -11,7 +11,7 @@ before_install:
 install:
     - gem install sass compass compass-blueprint
     - npm uninstall babel -g
-    - "( cd open-web-dev-tools/ && `which npm` install -g babel-cli babel-preset-env babel-preset-es2015 typings )"
+    - "( cd open-web-dev-tools/ && `which npm` install -g babel-cli babel-preset-env babel-preset-es2015 typescript typings )"
     - "( cd open-web-dev-tools/ && `which npm` install babel-preset-env babel-preset-react babel-preset-stage-2 )"
 script:
     - cd open-web-dev-tools/ && perl gen-helpers.pl && make && make test
