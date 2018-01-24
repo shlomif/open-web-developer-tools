@@ -1,5 +1,6 @@
 import {
     Input,
+    Output,
 } from "./open-web-dev-tools--base";
 
 export function test_tools_1()
@@ -35,6 +36,17 @@ export function test_tools_1()
             const inp = new Input({str: "500"});
             // TEST
             a.equal(10 + inp.getDecimalInt() * 3, 1510, "getDecimalInt()");
+        }
+
+    });
+
+    QUnit.test("test the output class", function(a : Assert) {
+        a.expect(1);
+
+        {
+            const outp = new Output({str: "Hello"});
+            // TEST
+            a.equal(outp.getString(), "Hello", "getString()");
         }
 
     });
