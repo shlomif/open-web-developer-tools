@@ -9,3 +9,8 @@ requirejs.config({
 
 var test_valid = require('web-fc-solve-tests--fcs-validate');
 test_valid.test_fcs_validate();
+
+{
+    let tests_mod = require('tools-tests-1');
+    tests_mod.test_tools_1();
+}
