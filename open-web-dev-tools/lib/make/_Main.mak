@@ -132,7 +132,7 @@ $(TYPINGS):
 
 TEST_FCS_VALID_DEST = $(D)/js/web-fc-solve-tests--fcs-validate.js
 
-TYPESCRIPT_DEST_FILES = $(FCS_VALID_DEST) $(TEST_FCS_VALID_DEST) $(D)/js/tools-tests-1.js
+TYPESCRIPT_DEST_FILES = $(FCS_VALID_DEST) $(TEST_FCS_VALID_DEST) $(D)/js/tools-tests-1.js $(D)/js/open-web-dev-tools--base.js
 TYPESCRIPT_DEST_FILES__NODE = $(patsubst $(D)/%.js,lib/for-node/%.js,$(TYPESCRIPT_DEST_FILES))
 TYPESCRIPT_COMMON_DEFS_FILES = src/js/typings/index.d.ts
 
