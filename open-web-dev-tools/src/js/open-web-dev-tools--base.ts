@@ -9,4 +9,7 @@ export class Input {
     public getString() {
         return this.str;
     }
+    public getDecimalInt() {
+        return parseInt(this.getString());
+    }
 };
