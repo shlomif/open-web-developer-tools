@@ -1,8 +1,15 @@
 import {
+    BaseTransform,
+    BaseTransformArgs,
     Input,
     Output,
 } from "./open-web-dev-tools--base";
 
+class UpperCaseTrans extends BaseTransform {
+    public transform(args: BaseTransformArgs): Output {
+        return new Output({str: args.input.getString().toUpperCase()});
+    }
+};
 export function test_tools_1()
 {
     QUnit.module("OpenWebDevTools.Tests");
@@ -47,6 +54,16 @@ export function test_tools_1()
             const outp = new Output({str: "Hello"});
             // TEST
             a.equal(outp.getString(), "Hello", "getString()");
+        }
+
+    });
+    QUnit.test("test the transform class", function(a : Assert) {
+        a.expect(1);
+
+        {
+            const outp = (new UpperCaseTrans()).transform({input: new Input({str: "Hello"})});
+            // TEST
+            a.equal(outp.getString(), "HELLO", "getString()");
         }
 
     });

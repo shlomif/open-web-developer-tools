@@ -25,3 +25,11 @@ export class Output {
         return this.str;
     }
 };
+export interface BaseTransformArgs {
+    input: Input,
+};
+export class BaseTransform {
+    public transform(args: BaseTransformArgs): Output {
+        throw "ToImpl";
+    }
+};
