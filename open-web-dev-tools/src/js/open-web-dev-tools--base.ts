@@ -33,3 +33,19 @@ export class BaseTransform {
         throw "ToImpl";
     }
 };
+class CbTrans extends BaseTransform {
+    private cb: (string) => string;
+
+    constructor(cb) {
+        super();
+        this.cb = cb;
+    }
+
+    public transform(args: BaseTransformArgs): Output {
+        return new Output({str: this.cb(args.input.getString())});
+    }
+};
+
+export function constructStrToStrTransform(cb: (string) => string) {
+    return new CbTrans(cb);
+};
