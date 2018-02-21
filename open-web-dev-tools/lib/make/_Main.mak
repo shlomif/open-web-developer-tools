@@ -130,9 +130,7 @@ $(DEST_BABEL_JSES): $(D)/%.js: lib/babel/%.js
 $(TYPINGS):
 	cd src/js && typings install dt~qunit --global --save
 
-TEST_FCS_VALID_DEST = $(D)/js/web-fc-solve-tests--fcs-validate.js
-
-TYPESCRIPT_DEST_FILES = $(FCS_VALID_DEST) $(TEST_FCS_VALID_DEST) $(D)/js/tools-tests-1.js $(D)/js/open-web-dev-tools--base.js
+TYPESCRIPT_DEST_FILES = $(FCS_VALID_DEST) $(D)/js/tools-tests-1.js $(D)/js/open-web-dev-tools--base.js
 TYPESCRIPT_DEST_FILES__NODE = $(patsubst $(D)/%.js,lib/for-node/%.js,$(TYPESCRIPT_DEST_FILES))
 TYPESCRIPT_COMMON_DEFS_FILES = src/js/typings/index.d.ts
 
@@ -150,8 +148,6 @@ $(TYPESCRIPT_DEST_FILES): $(D)/%.js: src/%.ts
 
 $(TYPESCRIPT_DEST_FILES__NODE): lib/for-node/%.js: src/%.ts
 	tsc --target es5 --module commonjs --outDir lib/for-node/js $(TYPESCRIPT_COMMON_DEFS_FILES) $<
-
-$(TEST_FCS_VALID_DEST): $(patsubst $(D)/%.js,src/%.ts,$(FCS_VALID_DEST))
 
 FC_PRO_4FC_DUMPS = $(filter charts/fc-pro--4fc-intractable-deals--report/data/%.dump.txt,$(SRC_IMAGES))
 FC_PRO_4FC_TSVS = $(patsubst %.dump.txt,$(D)/%.tsv,$(FC_PRO_4FC_DUMPS))
