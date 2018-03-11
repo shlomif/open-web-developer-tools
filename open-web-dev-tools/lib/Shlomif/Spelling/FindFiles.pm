@@ -8,10 +8,7 @@ use List::MoreUtils qw/any/;
 
 use HTML::Spelling::Site::Finder ();
 
-my @prunes =
-(
-    qr#\Adest/js/jquery-ui/#,
-);
+my @prunes = ( qr#\Adest/js/jquery-ui/#, );
 
 sub list_htmls
 {
@@ -29,4 +26,3 @@ sub list_htmls
 }
 
 1;
-
