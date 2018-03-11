@@ -1,4 +1,5 @@
 open-web-dev-tools/.sass-cache/
+open-web-dev-tools/.tidyall.d/
 open-web-dev-tools/Makefile
 open-web-dev-tools/Tests/data/cache/spelling-timestamp.json
 open-web-dev-tools/dest/
