@@ -1,6 +1,3 @@
-
-SHELL = /bin/bash
-
 all: dummy
 
 WITH_DEVEL_VERSION = 1
@@ -35,8 +32,6 @@ IMAGES = $(addprefix $(D)/,$(IMAGES_PRE1))
 
 # WML_FLAGS = -DBERLIOS=BERLIOS
 
-HTMLS = $(addprefix $(D)/,$(SRC_DOCS))
-
 INCLUDES_PROTO = std/logo.wml
 INCLUDES = $(addprefix lib/,$(INCLUDES_PROTO))
 
@@ -50,9 +45,6 @@ SUBDIRS = $(addprefix $(D)/,$(SRC_DIRS))
 INDEXES = $(addsuffix /index.html,$(SUBDIRS_WITH_INDEXES))
 
 
-COMMON_PREPROC_FLAGS = -I $$HOME/conf/wml/Latemp/lib -I../lib
-LATEMP_WML_FLAGS =$(shell latemp-config --wml-flags)
-
 TTML_FLAGS += $(COMMON_PREPROC_FLAGS)
 WML_FLAGS += $(COMMON_PREPROC_FLAGS)
 
@@ -65,7 +57,7 @@ CSS_TARGETS = $(D)/style.css $(D)/print.css $(D)/jqui-override.css $(D)/web-fc-s
 
 DEST_WEB_FC_SOLVE_UI_MIN_JS = $(D)/js/web-fcs.min.js
 
-dummy : $(D) $(SUBDIRS) $(HTMLS) $(IMAGES) $(RAW_SUBDIRS) $(ARC_DOCS) $(INDEXES) $(DOCS_AUX) $(DOCS_HTMLS) $(DEST_LIBFREECELL_SOLVER_JS) $(DEST_LIBFREECELL_SOLVER_JS_NON_MIN) $(DEST_QSTRING_JS) $(DEST_WEB_FC_SOLVE_UI_MIN_JS) $(CSS_TARGETS) htaccesses_target
+dummy : $(D) $(SUBDIRS) $(IMAGES) $(RAW_SUBDIRS) $(ARC_DOCS) $(INDEXES) $(DOCS_AUX) $(DEST_QSTRING_JS) $(DEST_WEB_FC_SOLVE_UI_MIN_JS) $(CSS_TARGETS) htaccesses_target
 
 SASS_STYLE = compressed
 # SASS_STYLE = expanded
@@ -89,13 +81,6 @@ $(ARC_DOCS): $(D)/% : ../../source/%.txt
 $(DOCS_AUX): $(D)/docs/distro/% : ../../source/%
 	cp -f "$<" "$@"
 
-$(DOCS_HTMLS): $(D)/docs/distro/% : ../../source/%
-	cat "$<" | perl -0777 -lapE 's#<table #<table summary="identifiers on the left, descriptions on the right" #g' > "$@"
-
-$(HTMLS): $(D)/% : src/%.wml src/.wmlrc template.wml $(INCLUDES)
-	WML_LATEMP_PATH="$$(perl -MFile::Spec -e 'print File::Spec->rel2abs(shift)' '$@')" ; \
-	(cd src && wml -o "$${WML_LATEMP_PATH}" $(WML_FLAGS) -DLATEMP_FILENAME="$(patsubst src/%.wml,%,$<)" $(patsubst src/%,%,$<))
-
 $(IMAGES): $(D)/% : src/%
 	cp -f $< $@
 
@@ -104,9 +89,6 @@ $(RAW_SUBDIRS): $(D)/% : src/%
 	cp -r $< $@
 
 MULTI_YUI = ./bin/Run-YUI-Compressor
-
-$(DEST_LIBFREECELL_SOLVER_JS): $(LIBFREECELL_SOLVER_JS)
-	cp -f $< $@
 
 $(DEST_QSTRING_JS): lib/jquery/jquery.querystring.js
 	$(MULTI_YUI) -o $@ $<
