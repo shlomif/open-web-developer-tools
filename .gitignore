@@ -4,5 +4,7 @@
 /open-web-dev-tools/Tests/data/cache/spelling-timestamp.json
 /open-web-dev-tools/dest/
 /open-web-dev-tools/lib/for-node/js/
+/open-web-dev-tools/node_modules/
+/open-web-dev-tools/package-lock.json
 /open-web-dev-tools/src/js/typings.json
 /open-web-dev-tools/src/js/typings/
