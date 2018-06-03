@@ -1,3 +1,5 @@
+[Flake8]
+select = **/*.py
 [PerlTidy]
 select = **/*.{pl,pm,t}
 argv = -ci=4 -bl -cti=0

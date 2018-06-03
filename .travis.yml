@@ -11,7 +11,8 @@ install:
     - gem install sass compass compass-blueprint
     - sudo cpanm Alien::Tidyp YAML::XS
     - sudo cpanm --force HTML::Tidy
-    - sudo cpanm HTML::Spelling::Site MooX MooX::late Perl::Critic Perl::Tidy Test::Code::TidyAll Test::HTML::Recursive::DeprecatedTags Test::HTML::Tidy::Recursive::Strict Test::TrailingSpace
+    - sudo cpanm Code::TidyAll::Plugin::Flake8 HTML::Spelling::Site MooX MooX::late Perl::Critic Perl::Tidy Test::Code::TidyAll Test::HTML::Recursive::DeprecatedTags Test::HTML::Tidy::Recursive::Strict Test::TrailingSpace
+    - "`which python3` -m pip install --upgrade flake8"
     - npm uninstall babel -g
     - "( cd open-web-dev-tools/ && bash -x bin/install-npm-deps.sh )"
 script:
