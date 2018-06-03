@@ -1,4 +1,4 @@
-# How to build the fc-solve site.
+# How to build the site.
 
 ## Dependencies:
 
@@ -16,10 +16,3 @@
 1. `./gen-helpers.pl`
 2. `make`
 3. `make test`
-4. `make PROD=1`
-
-## Assets.
-
-The assets (downloads/tarballs/etc.) for this site are kept in a
-separate repository: http://github.com/shlomif/fc-solve-site-assets
-
