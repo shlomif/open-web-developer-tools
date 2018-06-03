@@ -14,7 +14,7 @@ WML_FLAGS = -DBERLIOS=BERLIOS
 
 #D = /home/httpd/html/ip-noise
 
-TEMP_UPLOAD_URL = $${__HOMEPAGE_REMOTE_PATH}/fc-solve-temp
+TEMP_UPLOAD_URL = $${__HOMEPAGE_REMOTE_PATH}/open-web-dev-tools-temp
 UPLOAD_URL = $(TEMP_UPLOAD_URL)
 
 ifeq ($(PROD),1)
@@ -23,7 +23,7 @@ ifeq ($(PROD),1)
 
 	WML_FLAGS += -DPRODUCTION=1
 
-	UPLOAD_URL = hostgator:domains/fc-solve/public_html
+	UPLOAD_URL = hostgator:domains/open-web-dev-tools/public_html
 
 endif
 
@@ -168,11 +168,8 @@ $(ALL_HTACCESSES): $(D)/%.htaccess: src/%my_htaccess.conf
 upload: all
 	$(RSYNC) $(D)/ $(UPLOAD_URL)
 
-# upload_temp: all
-#	$(RSYNC) $(TEMP_UPLOAD_URL)
-
 upload_local: all
-	$(RSYNC) $(D)/ /var/www/html/shlomif/fc-solve-temp
+	$(RSYNC) $(D)/ /var/www/html/$(USER)/open-web-dev-tools
 
 test: all
 	prove Tests/*.t
