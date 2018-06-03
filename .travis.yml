@@ -15,4 +15,4 @@ install:
     - npm uninstall babel -g
     - "( cd open-web-dev-tools/ && bash -x bin/install-npm-deps.sh )"
 script:
-    - cd open-web-dev-tools/ && perl gen-helpers && make && make test
+    - cd open-web-dev-tools/ && ( PATH="$PATH:$PWD/node_modules/.bin" ; perl gen-helpers && make && make test )
