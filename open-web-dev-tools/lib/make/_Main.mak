@@ -100,21 +100,16 @@ $(DEST_WEB_FC_SOLVE_UI_MIN_JS): $(WEB_FCS_UI_JS_SOURCES)
 
 FCS_VALID_DEST = $(D)/js/fcs-validate.js
 
-TYPINGS = src/js/typings/index.d.ts
-
 DEST_BABEL_JSES = $(D)/js/ms-rand.js
 
-all: $(TYPINGS) $(DEST_BABEL_JSES)
+all: $(DEST_BABEL_JSES)
 
 $(DEST_BABEL_JSES): $(D)/%.js: lib/babel/%.js
 	babel -o $@ $<
 
-$(TYPINGS):
-	cd src/js && typings install dt~qunit --global --save
-
 TYPESCRIPT_DEST_FILES = $(FCS_VALID_DEST) $(D)/js/tools-tests-1.js $(D)/js/open-web-dev-tools--base.js
 TYPESCRIPT_DEST_FILES__NODE = $(patsubst $(D)/%.js,lib/for-node/%.js,$(TYPESCRIPT_DEST_FILES))
-TYPESCRIPT_COMMON_DEFS_FILES = src/js/typings/index.d.ts
+TYPESCRIPT_COMMON_DEFS_FILES =
 
 JS_DEST_FILES__NODE =
 
