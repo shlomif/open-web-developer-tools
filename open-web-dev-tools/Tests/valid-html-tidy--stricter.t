@@ -13,7 +13,7 @@ Test::HTML::Tidy::Recursive::Strict->new(
             my $fn = shift;
             return not(
                 exists $whitelist{$fn}
-                or $fn =~ m#\A dest/(?: js/jquery-ui/ ) #x,
+                or $fn =~ m#\A dest/(?: js/jquery-ui/ | tools/ ) #x,
             );
         },
         targets => ['./dest'],

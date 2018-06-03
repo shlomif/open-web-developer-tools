@@ -142,6 +142,16 @@ $(D)/charts/fc-pro--4fc-intractable-deals--report/index.html $(D)/charts/fc-pro-
 
 all: $(FC_PRO_4FC_TSVS) $(FC_PRO_4FC_FILTERED_TSVS)
 
+TOOLS_PAGES_PIVOT = dest/tools/uppercase/index.xhtml
+
+all: $(TOOLS_PAGES_PIVOT)
+
+TOOLS_PAGES_GEN = bin/gen_tools_pages.py
+
+$(TOOLS_PAGES_PIVOT): $(TOOLS_PAGES_GEN)
+	mkdir -p dest/tools
+	python3 $<
+
 .PHONY:
 
 # Build index.html pages for the appropriate sub-directories.
