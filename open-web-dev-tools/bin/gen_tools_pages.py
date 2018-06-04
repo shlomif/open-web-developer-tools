@@ -58,7 +58,7 @@ type="image/x-icon"/>
 cols="80" rows="10"></textarea><br/>
 <button id="%(id_base)s_perform" class="perform">Run</button><br/>
 <label for="%(outp_id)s">Output:</label><br/>
-<textarea id="%(outp_id)s" class="output" readonly="1"
+<textarea id="%(outp_id)s" class="output" readonly="readonly"
 cols="80" rows="10"></textarea><br/>
 <script type="text/javascript">
 requirejs.config({
