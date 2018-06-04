@@ -49,9 +49,9 @@ type="image/x-icon"/>
 </head>
 <body>
 <h1>Hello</h1>
-<textarea id="%(id_base)s_input" class="input"></textarea>
-<button id="%(id_base)s_perform" class="perform"/>
-<textarea id="%(id_base)s_output" class="output"></textarea>
+<textarea id="%(id_base)s_input" class="input"></textarea><br/>
+<button id="%(id_base)s_perform" class="perform">Run</button><br/>
+<textarea id="%(id_base)s_output" class="output"></textarea><br/>
 <script type="text/javascript">
 require(["%(root_path)s/js/tools/%(id_base)s.js",
     "%(root_path)s/js/open-web-dev-tools--base.js"], function (trans, base) {
