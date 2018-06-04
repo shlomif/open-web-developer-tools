@@ -48,8 +48,8 @@ title="Normal" media="screen"/>
 media="print"/>
 <link href="%(root_path)s/favicon.ico" rel="shortcut icon"
 type="image/x-icon"/>
-<script type="text/javascript" src="%(root_path)s/js/jq.js"></script>
-<script type="text/javascript" src="%(root_path)s/js/require--debug.js"/>
+<script src="%(root_path)s/js/jq.js"></script>
+<script src="%(root_path)s/js/require--debug.js"/>
 </head>
 <body>
 <h1>%(title)s</h1>
@@ -60,7 +60,7 @@ cols="80" rows="10"></textarea><br/>
 <label for="%(outp_id)s">Output:</label><br/>
 <textarea id="%(outp_id)s" class="output" readonly="readonly"
 cols="80" rows="10"></textarea><br/>
-<script type="text/javascript">
+<script>
 requirejs.config({
      baseUrl: '%(root_path)s/js',
      });
