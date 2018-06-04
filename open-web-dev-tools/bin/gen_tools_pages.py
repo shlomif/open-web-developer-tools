@@ -52,7 +52,7 @@ type="image/x-icon"/>
 <script type="text/javascript" src="%(root_path)s/js/require--debug.js"/>
 </head>
 <body>
-<h1>Hello</h1>
+<h1>%(title)s</h1>
 <label for="%(inp_id)s">Input:</label><br/>
 <textarea id="%(inp_id)s" class="input"
 cols="80" rows="10"></textarea><br/>
