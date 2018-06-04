@@ -28,6 +28,10 @@ class Page:
             os.mkdir(d)
         path = d + '/index.xhtml'
         root_path = '../..'
+        id_base = params['id_base']
+        inp_id = id_base + '_input'
+        outp_id = id_base + '_output'
+
         with open(path, 'wt') as f:
             f.write('''<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html>
@@ -49,10 +53,12 @@ type="image/x-icon"/>
 </head>
 <body>
 <h1>Hello</h1>
-<textarea id="%(id_base)s_input" class="input"
+<label for="%(inp_id)s">Input:</label><br/>
+<textarea id="%(inp_id)s" class="input"
 cols="80" rows="10"></textarea><br/>
 <button id="%(id_base)s_perform" class="perform">Run</button><br/>
-<textarea id="%(id_base)s_output" class="output"
+<label for="%(outp_id)s">Output:</label><br/>
+<textarea id="%(outp_id)s" class="output"
 cols="80" rows="10"></textarea><br/>
 <script type="text/javascript">
 requirejs.config({
@@ -76,7 +82,9 @@ require(["open-web-dev-tools--base", "tools/%(id_base)s",], (base, trans) => {
 </script>
 </body>
 </html>''' % {
-              'id_base': params['id_base'],
+              'id_base': id_base,
+              'inp_id': inp_id,
+              'outp_id': outp_id,
               'root_path': root_path,
               'title': params['title'],
              })
