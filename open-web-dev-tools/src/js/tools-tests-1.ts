@@ -5,6 +5,7 @@ import {
     Output,
     constructStrToStrTransform,
 } from "./open-web-dev-tools--base";
+import { trans} from "./tools/uppercase";
 
 class UpperCaseTrans extends BaseTransform {
     public transform(args: BaseTransformArgs): Output {
@@ -76,6 +77,16 @@ export function test_tools_1()
             const outp = t.transform({input: new Input({str: "Test"})});
             // TEST
             a.equal(outp.getString(), "test", "getString()");
+        }
+
+    });
+    QUnit.test("test the uppercase transform", function(a : Assert) {
+        a.expect(1);
+
+        {
+            const outp = trans.transform({input: new Input({str: "Testé"})});
+            // TEST
+            a.equal(outp.getString(), "TESTÉ", "getString()");
         }
 
     });
