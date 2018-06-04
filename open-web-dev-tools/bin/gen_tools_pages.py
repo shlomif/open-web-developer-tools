@@ -44,8 +44,8 @@ title="Normal" media="screen"/>
 media="print"/>
 <link href="%(root_path)s/favicon.ico" rel="shortcut icon"
 type="image/x-icon"/>
-<script type="text/javascript" src="%(root_path)s/js/require--debug.js"/>
 <script type="text/javascript" src="%(root_path)s/js/jq.js"></script>
+<script type="text/javascript" src="%(root_path)s/js/require--debug.js"/>
 </head>
 <body>
 <h1>Hello</h1>
@@ -53,8 +53,12 @@ type="image/x-icon"/>
 <button id="%(id_base)s_perform" class="perform">Run</button><br/>
 <textarea id="%(id_base)s_output" class="output"></textarea><br/>
 <script type="text/javascript">
+requirejs.config({
+     baseUrl: '%(root_path)s/js',
+     });
 require(["%(root_path)s/js/tools/%(id_base)s.js",
     "%(root_path)s/js/open-web-dev-tools--base.js"], function (trans, base) {
+    $(function() {
     const id_base = '%(id_base)s';
     const button_id = id_base + '_perform';
     $("#" + button_id).on('click', function() {
@@ -65,6 +69,7 @@ require(["%(root_path)s/js/tools/%(id_base)s.js",
             )
         });
         $("#" + id_base + '_output').text(outp.getString());
+    });
     });
 });
 </script>

@@ -26,8 +26,9 @@ SUBDIRS = $(addprefix $(D)/,$(SRC_DIRS))
 CSS_TARGETS = $(D)/style.css $(D)/print.css $(D)/jqui-override.css $(D)/web-fc-solve.css
 
 DEST_WEB_FC_SOLVE_UI_MIN_JS = $(D)/js/web-fcs.min.js
+DEST_JSES = $(D)/js/require--debug.js $(D)/js/require.js $(D)/js/jq.js
 
-dummy : $(D) $(SUBDIRS) $(IMAGES) $(DEST_QSTRING_JS) $(DEST_WEB_FC_SOLVE_UI_MIN_JS) $(CSS_TARGETS) htaccesses_target
+dummy : $(D) $(SUBDIRS) $(IMAGES) $(DEST_QSTRING_JS) $(DEST_WEB_FC_SOLVE_UI_MIN_JS) $(CSS_TARGETS) htaccesses_target $(DEST_JSES)
 
 SASS_STYLE = compressed
 # SASS_STYLE = expanded
@@ -43,7 +44,7 @@ $(D) $(SUBDIRS): % :
 		mkdir $@ ; \
 	fi
 
-$(IMAGES): $(D)/% : src/%
+$(DEST_JSES) $(IMAGES): $(D)/% : src/%
 	cp -f $< $@
 
 MULTI_YUI = ./bin/Run-YUI-Compressor
