@@ -11,6 +11,7 @@
 """
 
 import os
+import os.path
 
 
 class Page:
@@ -23,7 +24,8 @@ class Page:
         basename = params['basename']
         dir_ = 'dest/tools'
         d = dir_ + '/' + basename
-        os.mkdir(d)
+        if not os.path.exists(d):
+            os.mkdir(d)
         path = d + '/index.xhtml'
         root_path = '../..'
         with open(path, 'wt') as f:
@@ -42,12 +44,17 @@ title="Normal" media="screen"/>
 media="print"/>
 <link href="%(root_path)s/favicon.ico" rel="shortcut icon"
 type="image/x-icon"/>
-<script type="text/javascript" src="%(root_path)s/js/main_all.js"></script>
+<script type="text/javascript" src="%(root_path)s/js/require--debug.js"/>
+<script type="text/javascript" src="%(root_path)s/js/jq.js"></script>
 </head>
 <body>
 <h1>Hello</h1>
+<textarea id="%(id_base)s_input" class="input"></textarea>
+<button id="%(id_base)s_perform" class="perform"/>
+<textarea id="%(id_base)s_output" class="output"></textarea>
 </body>
 </html>''' % {
+              'id_base': params['id_base'],
               'root_path': root_path,
               'title': params['title'],
              })
@@ -56,6 +63,7 @@ type="image/x-icon"/>
 PARAMS = [
           {
             'basename': 'uppercase',
+            'id_base': 'uppercase',
             'title': 'Convert to uppercase',
           }
          ]
