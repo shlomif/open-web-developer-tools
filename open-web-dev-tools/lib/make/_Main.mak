@@ -63,7 +63,7 @@ all: $(DEST_BABEL_JSES)
 $(DEST_BABEL_JSES): $(D)/%.js: lib/babel/%.js
 	babel -o $@ $<
 
-TYPESCRIPT_DEST_FILES = $(D)/js/tools-tests-1.js $(D)/js/open-web-dev-tools--base.js
+TYPESCRIPT_DEST_FILES = $(D)/js/tools/uppercase.js $(D)/js/tools-tests-1.js $(D)/js/open-web-dev-tools--base.js
 TYPESCRIPT_DEST_FILES__NODE = $(patsubst $(D)/%.js,lib/for-node/%.js,$(TYPESCRIPT_DEST_FILES))
 TYPESCRIPT_COMMON_DEFS_FILES =
 
