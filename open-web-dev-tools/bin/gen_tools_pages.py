@@ -56,9 +56,7 @@ type="image/x-icon"/>
 requirejs.config({
      baseUrl: '%(root_path)s/js',
      });
-require(["open-web-dev-tools--base", "tools/%(id_base)s",
-    ], function (base, trans) {
-    $(function() {
+require(["open-web-dev-tools--base", "tools/%(id_base)s",], (base, trans) => {
     const id_base = '%(id_base)s';
     const button_id = id_base + '_perform';
     $("#" + button_id).on('click', function() {
@@ -71,7 +69,6 @@ require(["open-web-dev-tools--base", "tools/%(id_base)s",
             )
         });
         $("#" + id_base + '_output').val(outp.getString());
-    });
     });
 });
 </script>
