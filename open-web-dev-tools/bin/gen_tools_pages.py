@@ -49,9 +49,11 @@ type="image/x-icon"/>
 </head>
 <body>
 <h1>Hello</h1>
-<textarea id="%(id_base)s_input" class="input"></textarea><br/>
+<textarea id="%(id_base)s_input" class="input"
+cols="80" rows="10"></textarea><br/>
 <button id="%(id_base)s_perform" class="perform">Run</button><br/>
-<textarea id="%(id_base)s_output" class="output"></textarea><br/>
+<textarea id="%(id_base)s_output" class="output"
+cols="80" rows="10"></textarea><br/>
 <script type="text/javascript">
 requirejs.config({
      baseUrl: '%(root_path)s/js',
