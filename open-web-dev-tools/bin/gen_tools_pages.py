@@ -56,19 +56,21 @@ type="image/x-icon"/>
 requirejs.config({
      baseUrl: '%(root_path)s/js',
      });
-require(["%(root_path)s/js/tools/%(id_base)s.js",
-    "%(root_path)s/js/open-web-dev-tools--base.js"], function (trans, base) {
+require(["open-web-dev-tools--base", "tools/%(id_base)s",
+    ], function (base, trans) {
     $(function() {
     const id_base = '%(id_base)s';
     const button_id = id_base + '_perform';
     $("#" + button_id).on('click', function() {
+        const ctl = $("#" + id_base + '_input');
+        const text = ctl.val();
         const outp = trans.trans.transform({
             input: new base.Input({
-                str: $("#" + id_base + '_input').text()
+                str: text
                 }
             )
         });
-        $("#" + id_base + '_output').text(outp.getString());
+        $("#" + id_base + '_output').val(outp.getString());
     });
     });
 });
