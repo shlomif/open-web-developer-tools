@@ -52,6 +52,22 @@ type="image/x-icon"/>
 <textarea id="%(id_base)s_input" class="input"></textarea>
 <button id="%(id_base)s_perform" class="perform"/>
 <textarea id="%(id_base)s_output" class="output"></textarea>
+<script type="text/javascript">
+require(["%(root_path)s/js/tools/%(id_base)s.js",
+    "%(root_path)s/js/open-web-dev-tools--base.js"], function (trans, base) {
+    const id_base = '%(id_base)s';
+    const button_id = id_base + '_perform';
+    $("#" + button_id).on('click', function() {
+        const outp = trans.trans.transform({
+            input: new base.Input({
+                str: $("#" + id_base + '_input').text()
+                }
+            )
+        });
+        $("#" + id_base + '_output').text(outp.getString());
+    });
+});
+</script>
 </body>
 </html>''' % {
               'id_base': params['id_base'],
