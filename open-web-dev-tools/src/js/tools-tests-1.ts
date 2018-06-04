@@ -68,7 +68,6 @@ export function test_tools_1()
         }
 
     });
-}
     QUnit.test("test the constructStrToStrTransform", function(a : Assert) {
         a.expect(1);
 
@@ -80,3 +79,4 @@ export function test_tools_1()
         }
 
     });
+}
