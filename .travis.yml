@@ -6,7 +6,7 @@ python:
     - '3.6'
 before_install:
     - sudo apt-get update -qq
-    - sudo apt-get install --no-install-recommends -y cpanminus hunspell myspell-en-gb node npm perl libhunspell-dev libperl-dev
+    - sudo apt-get install --no-install-recommends -y cpanminus hunspell libhunspell-dev libperl-dev myspell-en-gb node npm perl
     - cpanm local::lib
     - eval "$(perl -Mlocal::lib=$HOME/perl_modules)"
 install:
