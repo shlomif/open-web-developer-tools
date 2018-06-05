@@ -78,13 +78,9 @@ export function test_tools_1()
     QUnit.test("test the constructStrToStrTransform", function(a : Assert) {
         a.expect(1);
 
-        {
-            const t = constructStrToStrTransform((s) => s.toLowerCase());
-            const outp = t.transform({input: new Input({str: "Test"})});
-            // TEST
-            a.equal(outp.getString(), "test", "getString()");
-        }
-
+        const t = constructStrToStrTransform((s) => s.toLowerCase());
+        // TEST
+        testTrans(a, t, "Test", "test", "constructStrToStrTransform");
     });
     QUnit.test("test the uppercase transform", function(a : Assert) {
         a.expect(1);
