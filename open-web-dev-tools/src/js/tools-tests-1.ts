@@ -70,6 +70,11 @@ export function test_tools_1()
         }
 
     });
+    function testTrans (a: Assert, t, inp_str, want, blurb) {
+        const outp = t.transform({input: new Input({str: inp_str})});
+        a.equal(outp.getString(), want, blurb);
+        return;
+    }
     QUnit.test("test the constructStrToStrTransform", function(a : Assert) {
         a.expect(1);
 
@@ -83,21 +88,12 @@ export function test_tools_1()
     });
     QUnit.test("test the uppercase transform", function(a : Assert) {
         a.expect(1);
-
-        {
-            const outp = uc_trans.transform({input: new Input({str: "Testé"})});
-            // TEST
-            a.equal(outp.getString(), "TESTÉ", "getString()");
-        }
-
+        // TEST
+        testTrans(a, uc_trans, "Testé", "TESTÉ", "uppercase");
     });
     QUnit.test("test the lowercase transform", function(a : Assert) {
         a.expect(1);
-
-        {
-            const outp = lc_trans.transform({input: new Input({str: "TeÖstSTRé"})});
-            // TEST
-            a.equal(outp.getString(), "teöststré", "lowercase.getString()");
-        }
+        // TEST
+        testTrans(a, lc_trans, "TeÖstSTRé", "teöststré", "lowercase");
     });
 }
