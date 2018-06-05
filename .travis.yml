@@ -12,10 +12,10 @@ before_install:
 install:
     - gem install sass compass compass-blueprint
     - cpanm Alien::Tidyp YAML::XS
-      # - cpanm Alien::TidyHTML5
+    - cpanm Alien::TidyHTML5
     - cpanm --force HTML::Tidy
       # - cpanm --force HTML::Tidy5
-    - (git clone https://github.com/robrwo/html-tidy5 && cd html-tidy5 && cpanm . && perl Makefile.PL && make && make test && make install)
+    - (git clone https://github.com/robrwo/html-tidy5 && cd html-tidy5 && cpanm --installdeps . && perl Makefile.PL && make && make test && make install)
     - cpanm Code::TidyAll::Plugin::Flake8 Code::TidyAll::Plugin::TSLint HTML::Spelling::Site IO::All MooX MooX::late Perl::Critic Perl::Tidy Test::Code::TidyAll Test::HTML::Recursive::DeprecatedTags Test::HTML::Tidy::Recursive::Strict Test::TrailingSpace
     - "`which python3` -m pip install --upgrade flake8"
     - npm uninstall babel -g
