@@ -11,3 +11,7 @@ requirejs.config({
     let tests_mod = require('tools-tests-1');
     tests_mod.test_tools_1();
 }
+{
+    let tests_mod = require('tools-test-lowercase');
+    tests_mod.test_tools_1();
+}

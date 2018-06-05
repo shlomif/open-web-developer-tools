@@ -92,10 +92,15 @@ require(["open-web-dev-tools--base", "tools/%(id_base)s",], (base, trans) => {
 
 PARAMS = [
           {
+            'basename': 'lowercase',
+            'id_base': 'lowercase',
+            'title': 'Convert to lowercase',
+          },
+          {
             'basename': 'uppercase',
             'id_base': 'uppercase',
             'title': 'Convert to uppercase',
-          }
+          },
          ]
 
 
