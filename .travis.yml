@@ -12,7 +12,7 @@ before_install:
 install:
     - gem install sass compass compass-blueprint
     - cpanm Alien::Tidyp YAML::XS
-    - cpanm Alien::TidyHTML5
+      # - cpanm Alien::TidyHTML5
     - cpanm --force HTML::Tidy
     - cpanm --force HTML::Tidy5
     - cpanm Code::TidyAll::Plugin::Flake8 Code::TidyAll::Plugin::TSLint HTML::Spelling::Site IO::All MooX MooX::late Perl::Critic Perl::Tidy Test::Code::TidyAll Test::HTML::Recursive::DeprecatedTags Test::HTML::Tidy::Recursive::Strict Test::TrailingSpace
