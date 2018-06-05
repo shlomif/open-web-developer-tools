@@ -7,3 +7,5 @@ ignore = dest/**/*
 [PerlCritic]
 select = **/*.{pl,pm,t}
 ignore = dest/**/*
+[TSLint]
+select = src/**/*.ts
