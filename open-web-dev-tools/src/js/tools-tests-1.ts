@@ -7,6 +7,7 @@ import {
 } from "./open-web-dev-tools--base";
 import { trans as lc_trans } from "./tools/lowercase";
 import { trans as uc_trans } from "./tools/uppercase";
+import { trans as url_enc_trans } from "./tools/urlencode";
 
 class UpperCaseTrans extends BaseTransform {
     public transform(args: BaseTransformArgs): Output {
@@ -91,5 +92,13 @@ export function test_tools_1()
         a.expect(1);
         // TEST
         testTrans(a, lc_trans, "TeÖstSTRé", "teöststré", "lowercase");
+    });
+    QUnit.test("test the urlenc transform", function(a : Assert) {
+        a.expect(1);
+        // TEST
+        testTrans(a, url_enc_trans,
+            "https://en.wikipedia.org/wiki/Main_Page",
+            "https://en.wikipedia.org/wiki/Main_Page",
+            "simple url encode");
     });
 }
