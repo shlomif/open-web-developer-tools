@@ -97,6 +97,11 @@ PARAMS = [
             'title': 'Convert to lowercase',
           },
           {
+            'basename': 'prettify_json',
+            'id_base': 'prettify_json',
+            'title': 'Pretty-print / prettify JSON',
+          },
+          {
             'basename': 'uppercase',
             'id_base': 'uppercase',
             'title': 'Convert to uppercase',
