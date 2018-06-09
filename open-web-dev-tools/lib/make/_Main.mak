@@ -64,7 +64,7 @@ all: $(DEST_BABEL_JSES)
 $(DEST_BABEL_JSES): $(D)/%.js: lib/babel/%.js
 	babel -o $@ $<
 
-TYPESCRIPT__TOOLS = lowercase prettify_json urlencode uppercase
+TYPESCRIPT__TOOLS = lowercase minify_json prettify_json urlencode uppercase
 TYPESCRIPT_DEST_FILES__BASE = $(patsubst %,tools/%,$(TYPESCRIPT__TOOLS)) tools-tests-1 open-web-dev-tools--base
 TYPESCRIPT_DEST_FILES = $(patsubst %,$(D)/js/%.js,$(TYPESCRIPT_DEST_FILES__BASE))
 TYPESCRIPT_DEST_FILES__NODE = $(patsubst $(D)/%.js,lib/for-node/%.js,$(TYPESCRIPT_DEST_FILES))

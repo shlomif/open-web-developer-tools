@@ -9,6 +9,7 @@ import { trans as lc_trans } from "./tools/lowercase";
 import { trans as uc_trans } from "./tools/uppercase";
 import { trans as url_enc_trans } from "./tools/urlencode";
 import { trans as json_prettify_trans } from "./tools/prettify_json";
+import { trans as minify_json_trans } from "./tools/minify_json";
 
 class UpperCaseTrans extends BaseTransform {
     public transform(args: BaseTransformArgs): Output {
@@ -106,5 +107,10 @@ export function test_tools_1()
         a.expect(1);
         // TEST
         testTrans(a, json_prettify_trans, '{"a":"foo"}', "{\n    \"a\": \"foo\"\n}", "prettify_json");
+    });
+    QUnit.test("test the minify_json transform", function(a : Assert) {
+        a.expect(1);
+        // TEST
+        testTrans(a, minify_json_trans, "{\n    \"a\": \"foo\"\n}", '{"a":"foo"}', "minify_json");
     });
 }

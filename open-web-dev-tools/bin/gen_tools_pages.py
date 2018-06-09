@@ -97,6 +97,11 @@ PARAMS = [
             'title': 'Convert to lowercase',
           },
           {
+            'basename': 'minify_json',
+            'id_base': 'minify_json',
+            'title': 'Minify / compress JSON',
+          },
+          {
             'basename': 'prettify_json',
             'id_base': 'prettify_json',
             'title': 'Pretty-print / prettify JSON',
