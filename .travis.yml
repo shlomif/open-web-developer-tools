@@ -24,4 +24,4 @@ script:
     - cd open-web-dev-tools/ && ( PATH="$PATH:$PWD/node_modules/.bin" ; perl gen-helpers && make && make test )
 cache:
     directories:
-    - $HOME/perl_modules
+        - $HOME/perl_modules
