@@ -9,8 +9,8 @@ use Test::More tests => 1;
 my $lib    = qr#libfreecell-solver\.js(?:\.mem)?#;
 my $finder = Test::TrailingSpace->new(
     {
-        root           => '.',
-        filename_regex => qr/./,
+        root              => '.',
+        filename_regex    => qr/./,
         abs_path_prune_re =>
 qr#(?:\A(?:\./)?(?:(?:node_modules/)|(?:(?:src|dest(?:-prod)?).*?typings.*\.ts\z)|lib/fc-solve-for-javascript|dest(?:-prod)?/(?:(?:js/$lib)|(?:js-fc-solve/(?:text|automated-tests)/$lib\z))))|(?:lib/for-node/$lib\z)|(?:$lib\z)|(?:\.(?:diff|jpg|patch|png|woff|xcf|xz|zip)\z)#,
     }

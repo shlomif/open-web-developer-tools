@@ -2,10 +2,12 @@
 select = **/*.py
 [PerlTidy]
 select = **/*.{pl,pm,t}
-argv = -ci=4 -bl -cti=0
+argv = -ci=4 -bl -cti=0 --character-encoding=none
 ignore = dest/**/*
 [PerlCritic]
 select = **/*.{pl,pm,t}
 ignore = dest/**/*
 [TSLint]
 select = src/**/*.ts
+[TestCount]
+select = **/*.t
